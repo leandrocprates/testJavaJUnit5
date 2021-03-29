@@ -9,7 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get ;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.List;
 
@@ -17,11 +23,15 @@ import java.util.List;
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application-test.properties")
 class TestJavaJUnit5ApplicationTests {
+
     @Autowired
     private UsuarioService usuarioService ;
 
     @Value("${mensagem.ok}")
     private String mensagem ;
+
+    @Autowired
+    private MockMvc mockMvc ;
 
     @BeforeEach
     public  void before(){
@@ -29,7 +39,20 @@ class TestJavaJUnit5ApplicationTests {
     }
 
     @Test
-    public void testBuscaUsuario(){
+    public void testBuscaUsuarioRestMvc() throws Exception {
+        ResultActions resultActions = mockMvc.perform(get("/lista-usuarios")
+                ).andExpect(status().isOk());
+
+        MockHttpServletResponse mockHttpServletResponse = resultActions.andReturn().getResponse();
+        String response = mockHttpServletResponse.getContentAsString() ;
+        int statusCode = mockHttpServletResponse.getStatus() ;
+        System.out.println("Response body : "+response);
+        System.out.println("Status Code : "+ statusCode);
+
+    }
+
+    @Test
+    public void testBuscaUsuarioService(){
         List<Usuario>  listaUsuarios =  usuarioService.findAllUsuario();
         Assertions.assertNotNull(listaUsuarios);
     }
