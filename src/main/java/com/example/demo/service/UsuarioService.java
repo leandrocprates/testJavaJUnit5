@@ -23,4 +23,10 @@ public class UsuarioService {
                 .orElseThrow(()-> new NotFoundException("Usuario não encontrado."));
     }
 
+    public Usuario salvar(Usuario usuario){
+        return usuarioRepository.save(usuario);
+    }
+
+
+
 }

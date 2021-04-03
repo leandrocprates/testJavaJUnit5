@@ -3,9 +3,9 @@ package com.example.demo.controller;
 import com.example.demo.model.Usuario;
 import com.example.demo.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
@@ -25,5 +25,11 @@ public class UsuarioController {
     public Usuario buscaUsuarioById(@PathVariable("id") int id ){
         return usuarioService.findById(id);
     }
+
+    @PostMapping("adicionar")
+    public ResponseEntity<Usuario> adicionarUsuario(@RequestBody  Usuario usuarioNovo){
+        return new ResponseEntity<>(usuarioService.salvar(usuarioNovo), HttpStatus.OK);
+    }
+
 
 }
