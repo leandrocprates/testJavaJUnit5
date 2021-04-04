@@ -23,7 +23,6 @@ Resposta :
 
 URL GET http://localhost:8080/lista-usuarios/1
 
-
 Resposta :
 ```json
 {
@@ -32,3 +31,25 @@ Resposta :
     "telefone": 1524574856
 }
 ```
+
+URL POST : http://localhost:8080/adicionar
+Content-Type : application/json 
+
+Requisição : 
+
+```json 
+{
+    "nome": "Kubernetes",
+    "telefone": 3565414856
+}
+``` 
+
+Resposta :  
+
+```json 
+{
+    "id": 3,
+    "nome": "Kubernetes",
+    "telefone": 3565414856
+}
+``` 
