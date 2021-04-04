@@ -36,6 +36,7 @@ class TestJavaJUnit5ApplicationTests {
     @Autowired
     private MockMvc mockMvc ;
 
+    
     @Autowired
     private ObjectMapper objectMapper ;
 
