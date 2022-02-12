@@ -54,3 +54,7 @@ Resposta :
     "telefone": 3565414856
 }
 ``` 
+
+Executar sonar : 
+
+mvn sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.login=002a0d3f220befafb446cc77bfe5bd487f26b7d0
